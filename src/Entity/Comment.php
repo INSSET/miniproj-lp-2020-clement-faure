@@ -53,7 +53,7 @@ class Comment
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
      * })
      */
-    private $email;
+    private $id_user;
 
     public function getIdComment(): ?int
     {
