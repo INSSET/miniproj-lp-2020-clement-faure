@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Article
  *
- * @ORM\Table(name="article", indexes={@ORM\Index(name="Article_Utilisateur_FK", columns={"id_user", "email"}), @ORM\Index(name="IDX_23A0E66E7927C746B3CA4B", columns={"email", "id_user"})})
  * @ORM\Entity
  */
 class Article
@@ -64,7 +63,7 @@ class Article
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
      * })
      */
-    private $id_user;
+    private $email;
 
     public function getIdArticle(): ?int
     {
