@@ -18,9 +18,15 @@ class ArticleController extends AbstractController
     public function index(): Response
     {
 
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll();
+
+
 
         return $this->render('article/index.html.twig', [
             'controller_name' => 'ArticleController',
+            'articles' => $articles
         ]);
     }
 
@@ -37,6 +43,12 @@ class ArticleController extends AbstractController
 
             $creation_date = new DateTime();
             $article->setCreationDate($creation_date);
+
+            if ($form['published']->getData() == true) {
+                $publication_date = new DateTime();
+                $article->setPublicationDate($publication_date);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
@@ -50,5 +62,20 @@ class ArticleController extends AbstractController
         return $this->render('article/create.html.twig', [
             'articleForm' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/article/{id}", name="article_show")
+     */
+
+    public function show(int $id) : Response{
+        $article = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->find($id);
+
+        return $this->render('article/show.html.twig',[
+            'article' => $article,
+        ]);
+
     }
 }

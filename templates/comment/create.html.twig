@@ -1,0 +1,21 @@
+{% block body %}
+
+    {% if form is defined %}
+    {% set formErrors = form.vars.errors.form.getErrors(true) %}
+        {% if formErrors|length %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in formErrors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {# Render the Form #}
+        {{ form_start(form) }}
+        {{ form_row(form.content) }}
+        <button class="btn">Commenter</button>
+        {{ form_end(form) }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+    {% if article %}
+    <h1>{{ article.title }}     {{ article.publicationDate|date('jS F Y') }}</h1>
+    <h2>{{ article.content }}</h2>
+    {% else %}
+        <h1>L'article recherché n'existe pas</h1>
+    {% endif %}
+    {% include('comment/create.html.twig') %}
+{% endblock %}
