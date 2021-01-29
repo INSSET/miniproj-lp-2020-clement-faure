@@ -21,30 +21,4 @@ class CommentController extends AbstractController
             'controller_name' => 'CommentController',
         ]);
     }
-
-
-    public function create(Request $request): Response
-    {
-        $comment = new Comment();
-        $form = $this->createFormBuilder($comment)
-            ->add('content', TextareaType::class, array('label' => false))
-            ->add('save', SubmitType::class, array('label' => 'Comment'))
-            ->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $creation_date = new DateTime();
-            $comment->setCreationDate($creation_date);
-
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($comment);
-            $entityManager->flush();
-        }
-        return $this->render('comment/create.html.twig', [
-            'commentForm' => $form->createView(),
-        ]);
-    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -66,9 +67,18 @@ class Article
      */
     private $email;
     /**
+     * @ORM\OneToMany(targetEntity="Comment",mappedBy="idArticle")
+     */
+    private $comments;
+    /**
      * @ORM\Column
      */
     private $image;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getIdArticle(): ?int
     {
@@ -152,6 +162,30 @@ class Article
     }
     public function setImage($image) {
         $this->image = $image;
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setIdArticle($this);
+        }
+        return $this;
+    }
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getIdArticle() === $this) {
+                $comment->setIdArticle(null);
+            }
+        }
         return $this;
     }
 

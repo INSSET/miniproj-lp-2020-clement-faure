@@ -1,0 +1,10 @@
+{% block body %}
+    {% for a in articles %}
+    <li>
+        <a href="{{ path('article_show', {id : a.idArticle}) }}">
+            {{ a.title }}
+        </a>
+        ({{ a.publicationDate|date('jS F Y') }})
+    </li>
+    {% endfor %}
+{% endblock %}

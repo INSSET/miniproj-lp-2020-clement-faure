@@ -3,15 +3,30 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Controller\CommentController;
+use App\Entity\Comment;
 use App\Form\ArticleType;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class ArticleController extends AbstractController
 {
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     /**
     * @Route("/", name="articles")
     */
@@ -75,13 +90,44 @@ class ArticleController extends AbstractController
      * @Route("/article/{id}", name="article_show")
      */
 
-    public function show(int $id) : Response{
+    public function show(int $id, Request $request) : Response
+    {
         $article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->find($id);
 
+        // Formulaire pour créer les commentaires
+
+        $comment = new Comment();
+        $form = $this->createFormBuilder($comment)
+            ->add('content', TextareaType::class, array('label' => false))
+            ->add('save', SubmitType::class, array('label' => 'Comment'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $creation_date = new DateTime();
+            $comment->setCreationDate($creation_date);
+
+            $user = $this->security->getUser();
+
+            $user->addComment($comment);
+            $article->addComment($comment);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+        }
+
+        $comments = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findBy(['idArticle' => $article]);
+
         return $this->render('article/show.html.twig',[
             'article' => $article,
+            'commentForm' => $form->createView(),
+            'comments' => $comments,
         ]);
 
     }

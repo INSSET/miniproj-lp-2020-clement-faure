@@ -5,10 +5,7 @@
 {% block body %}
 
     {% if article %}
-        <div class="container">
-        <div class="row">
 
-        <!-- Post Content Column -->
         <div class="col-lg-8">
 
         <!-- Title -->
@@ -31,71 +28,24 @@
         <p>{{ article.content }}</p>
 
         <hr>
-            {{ render(controller('App\\Controller\\CommentController::create', {})) }}
+
+                {# Render the Form #}
+                {{ form_start(commentForm) }}
+                {{ form_row(commentForm.content) }}
+                {{ form_row(commentForm.save) }}
+                {{ form_widget(commentForm) }}
+                {{ form_end(commentForm) }}
+
+            {% for c in comments %}
+                <h4>{{ c.email.firstName }} {{ c.email.lastName }}</h4>
+                <h7>{{ c.creationDate|date('jS F Y') }}</h7>
+                <h5>{{ c.content }}</h5>
+                <hr>
+            {% endfor %}
     </div>
-        <div class="col-md-4">
 
-            <!-- Search Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Search</h5>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-append">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Categories Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Categories</h5>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">Web Design</a>
-                                </li>
-                                <li>
-                                    <a href="#">HTML</a>
-                                </li>
-                                <li>
-                                    <a href="#">Freebies</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">JavaScript</a>
-                                </li>
-                                <li>
-                                    <a href="#">CSS</a>
-                                </li>
-                                <li>
-                                    <a href="#">Tutorials</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Side Widget</h5>
-                <div class="card-body">
-                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                </div>
-            </div>
-
-        </div>
-        </div>
-        </div>
     {% else %}
         <h1>L'article recherché n'existe pas</h1>
     {% endif %}
-    {% include('comment/create.html.twig') %}
 {% endblock %}

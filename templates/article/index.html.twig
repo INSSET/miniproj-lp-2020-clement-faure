@@ -10,13 +10,13 @@
 {% if articles %}
     {% for a in articles %}
         {% if a.published == 1 %}
-            <a href= "{{ path('article_show', {id : a.idArticle }) }}">
-            <h1>
-                {{ a.title }}
-            </h1>
-            </a>
-            <h2>{{ a.content }}</h2>
-            <h3>{{ a.publicationDate|date('jS F Y') }}</h3>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ a.title }}</h5>
+                    <p class="card-text">{{ a.content|u.truncate(20,'...') }}</p>
+                    <a href="{{ path('article_show', {id : a.idArticle }) }}" class="card-link">See more...</a>
+                </div>
+            </div>
         {% endif %}
     {% endfor %}
 {% endif %}
