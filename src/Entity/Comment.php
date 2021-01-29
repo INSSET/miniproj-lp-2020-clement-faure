@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Comment
  *
- * @ORM\Table(name="comment", indexes={@ORM\Index(name="COMMENTAIRE_Article_FK", columns={"id_article"}), @ORM\Index(name="COMMENTAIRE_Utilisateur0_FK", columns={"id_user", "email"}), @ORM\Index(name="IDX_9474526CE7927C746B3CA4B", columns={"email", "id_user"})})
  * @ORM\Entity
  */
 class Comment
@@ -53,7 +52,7 @@ class Comment
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
      * })
      */
-    private $id_user;
+    private $email;
 
     public function getIdComment(): ?int
     {

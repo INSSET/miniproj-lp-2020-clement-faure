@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
  *
- * @ORM\Table(name="article", indexes={@ORM\Index(name="Article_Utilisateur_FK", columns={"id_user", "email"}), @ORM\Index(name="IDX_23A0E66E7927C746B3CA4B", columns={"email", "id_user"})})
  * @ORM\Entity
  */
 class Article
@@ -64,7 +64,11 @@ class Article
      *   @ORM\JoinColumn(name="id_user", referencedColumnName="id")
      * })
      */
-    private $id_user;
+    private $email;
+    /**
+     * @ORM\Column
+     */
+    private $image;
 
     public function getIdArticle(): ?int
     {
@@ -95,24 +99,24 @@ class Article
         return $this;
     }
 
-    public function getCreationDate(): ?\DateTimeInterface
+    public function getCreationDate(): ?\DateTime
     {
         return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTimeInterface $creationDate): self
+    public function setCreationDate(\DateTime $creationDate): self
     {
         $this->creationDate = $creationDate;
 
         return $this;
     }
 
-    public function getPublicationDate(): ?\DateTimeInterface
+    public function getPublicationDate(): ?\DateTime
     {
         return $this->publicationDate;
     }
 
-    public function setPublicationDate(\DateTimeInterface $publicationDate): self
+    public function setPublicationDate(\DateTime $publicationDate): self
     {
         $this->publicationDate = $publicationDate;
 
@@ -143,5 +147,12 @@ class Article
         return $this;
     }
 
+    public function getImage() {
+        return $this->image;
+    }
+    public function setImage($image) {
+        $this->image = $image;
+        return $this;
+    }
 
 }
