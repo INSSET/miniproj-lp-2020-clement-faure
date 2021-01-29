@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -46,6 +47,11 @@ class Users implements UserInterface
      * @ORM\Column(type="string", length=50)
      */
     private $lastName;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment",mappedBy="email")
+     */
+    private $comments;
 
     public function getId(): ?int
     {
@@ -171,6 +177,30 @@ class Users implements UserInterface
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized);
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setEmail($this);
+        }
+        return $this;
+    }
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getEmail() === $this) {
+                $comment->setEmail(null);
+            }
+        }
+        return $this;
     }
 }
 
