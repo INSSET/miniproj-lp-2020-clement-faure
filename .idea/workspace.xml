@@ -20,17 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="431c6b9d-c2e6-476e-b74b-49cf2b088cb8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Repository/ArticleRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/article/show.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/comment/create.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/UsersAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/UsersAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Article.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ArticleType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ArticleType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/CommentType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/article/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article/create.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/article/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/article/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/article/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/comment/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/comment/create.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +180,21 @@
       <workItem from="1609232381611" duration="2432000" />
       <workItem from="1609246357218" duration="1700000" />
       <workItem from="1609316855436" duration="4529000" />
-      <workItem from="1609402279017" duration="3085000" />
+      <workItem from="1609402279017" duration="5218000" />
+      <workItem from="1609418609802" duration="1919000" />
+      <workItem from="1609576601607" duration="5944000" />
+      <workItem from="1609747521681" duration="685000" />
+      <workItem from="1610111673173" duration="320000" />
+      <workItem from="1610699368546" duration="1111000" />
+      <workItem from="1610704751614" duration="755000" />
+      <workItem from="1610725611631" duration="2244000" />
+      <workItem from="1610887725201" duration="600000" />
+      <workItem from="1610963184799" duration="962000" />
+      <workItem from="1610987797440" duration="5000" />
+      <workItem from="1611086699142" duration="2000" />
+      <workItem from="1611172140897" duration="52000" />
+      <workItem from="1611260810311" duration="142000" />
+      <workItem from="1611909895273" duration="2091000" />
     </task>
     <servers />
   </component>

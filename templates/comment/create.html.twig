@@ -1,7 +1,7 @@
 {% block body %}
 
-    {% if form is defined %}
-    {% set formErrors = form.vars.errors.form.getErrors(true) %}
+    {% if commentForm is defined %}
+    {% set formErrors = commentForm.vars.errors.form.getErrors(true) %}
         {% if formErrors|length %}
             <div class="alert alert-danger">
                 <ul>
@@ -13,9 +13,10 @@
         {% endif %}
 
         {# Render the Form #}
-        {{ form_start(form) }}
-        {{ form_row(form.content) }}
-        <button class="btn">Commenter</button>
-        {{ form_end(form) }}
+        {{ form_start(commentForm) }}
+        {{ form_row(commentForm.content) }}
+        {{ form_row(commentForm.save) }}
+        {{ form_widget(commentForm) }}
+        {{ form_end(commentForm) }}
     {% endif %}
 {% endblock %}

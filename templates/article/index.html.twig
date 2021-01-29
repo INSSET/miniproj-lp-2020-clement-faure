@@ -10,10 +10,11 @@
 {% if articles %}
     {% for a in articles %}
         {% if a.published == 1 %}
+            <a href= "{{ path('article_show', {id : a.idArticle }) }}">
             <h1>
-                <a href= "{{ path('article_show', {id : a.idArticle }) }}"></a>
                 {{ a.title }}
             </h1>
+            </a>
             <h2>{{ a.content }}</h2>
             <h3>{{ a.publicationDate|date('jS F Y') }}</h3>
         {% endif %}

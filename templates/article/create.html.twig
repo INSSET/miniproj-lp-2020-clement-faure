@@ -4,7 +4,7 @@
 {% block title %}Création d'un article{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <h1>Création d'un article</h1>
 
     {# If there are any errors on the form, display them #}
     {% set formErrors = articleForm.vars.errors.form.getErrors(true) %}
@@ -23,7 +23,7 @@
     {{ form_row(articleForm.title) }}
     {{ form_row(articleForm.content) }}
     {{ form_row(articleForm.published) }}
-
+    {{ form_widget(articleForm) }}
     <button class="btn">Create</button>
     {{ form_end(articleForm) }}
 {% endblock %}

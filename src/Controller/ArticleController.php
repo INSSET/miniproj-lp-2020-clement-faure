@@ -41,6 +41,13 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            /**
+             * $file = $article->getImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move('%kernel.root_dir%/images', $fileName);
+             */
+            $article->setImage("");
+
             $creation_date = new DateTime();
             $article->setCreationDate($creation_date);
 
@@ -77,5 +84,16 @@ class ArticleController extends AbstractController
             'article' => $article,
         ]);
 
+    }
+
+    public function getAllArticles() : Response
+    {
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll();
+
+        return $this->render('article/list.html.twig',[
+            'articles' => $articles,
+        ]);
     }
 }

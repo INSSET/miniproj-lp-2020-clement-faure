@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
@@ -64,6 +65,10 @@ class Article
      * })
      */
     private $email;
+    /**
+     * @ORM\Column
+     */
+    private $image;
 
     public function getIdArticle(): ?int
     {
@@ -142,5 +147,12 @@ class Article
         return $this;
     }
 
+    public function getImage() {
+        return $this->image;
+    }
+    public function setImage($image) {
+        $this->image = $image;
+        return $this;
+    }
 
 }

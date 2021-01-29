@@ -6,6 +6,9 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,10 +22,15 @@ class CommentController extends AbstractController
         ]);
     }
 
+
     public function create(Request $request): Response
     {
         $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
+        $form = $this->createFormBuilder($comment)
+            ->add('content', TextareaType::class, array('label' => false))
+            ->add('save', SubmitType::class, array('label' => 'Comment'))
+            ->getForm();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -36,7 +44,7 @@ class CommentController extends AbstractController
             $entityManager->flush();
         }
         return $this->render('comment/create.html.twig', [
-            'form' => $form->createView(),
+            'commentForm' => $form->createView(),
         ]);
     }
 }
