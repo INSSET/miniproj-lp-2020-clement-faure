@@ -10,6 +10,26 @@
     </head>
     <body>
         {% include('navbar.html.twig') %}
+        <div class="container">
+            <div class="row">
+
+                <!-- Post Content Column -->
+                <div class="col-md-4">
+
+                    <!-- Categories Widget -->
+                    <div class="card my-4">
+                        <h5 class="card-header">Articles</h5>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <ul class="list-unstyled mb-0">
+                                        {{ render(controller('App\\Controller\\ArticleController::getAllArticles', {})) }}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         {% block body %}{% endblock %}
         {% block javascripts %}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
