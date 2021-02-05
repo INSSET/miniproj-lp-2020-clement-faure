@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -145,12 +146,12 @@ class Article
         return $this;
     }
 
-    public function getEmail(): ?User
+    public function getEmail(): ?Users
     {
         return $this->email;
     }
 
-    public function setEmail(?User $email): self
+    public function setEmail(?Users $email): self
     {
         $this->email = $email;
 

@@ -10,11 +10,15 @@
 {% if articles %}
     {% for a in articles %}
         {% if a.published == 1 %}
-            <div class="card" style="width: 18rem;">
+            <div class="card mb-4">
+                <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{ a.title }}</h5>
+                    <h2 class="card-title">{{ a.title }}</h2>
                     <p class="card-text">{{ a.content|u.truncate(20,'...') }}</p>
-                    <a href="{{ path('article_show', {id : a.idArticle }) }}" class="card-link">See more...</a>
+                    <a href="{{ path('article_show', {id : a.idArticle }) }}" class="btn btn-primary">Read More →</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on {{ a.publicationDate|date('jS F Y') }}
                 </div>
             </div>
         {% endif %}

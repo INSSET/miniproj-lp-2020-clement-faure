@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Controller\CommentController;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use DateTime;
@@ -63,6 +62,7 @@ class ArticleController extends AbstractController
              */
             $article->setImage("");
 
+            $article->setEmail($this->container->get('security.token_storage')->getToken()->getUser());
             $creation_date = new DateTime();
             $article->setCreationDate($creation_date);
 
@@ -142,4 +142,47 @@ class ArticleController extends AbstractController
             'articles' => $articles,
         ]);
     }
+
+    /**
+     * @Route("/article/edit/{id}", name="article_edit")
+     */
+   public function edit (Request $request, int $id) : Response {
+
+       $article = $this->getDoctrine()
+           ->getRepository(Article::class)
+           ->find($id);
+
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('article_show', [
+                'id' => $id,
+            ]);
+       }
+       return $this->render('article/edit.html.twig', [
+           'form' => $form->createView()
+       ]);
+
+   }
+
+    /**
+     * @Route("article/delete/{id}", name="article_delete")
+     */
+
+   public function delete(Request $request, int $id){
+       $em = $this->getDoctrine()->getManager();
+       $article = $em->getRepository(Article::class)->find($id);
+       $em->remove($article);
+       $em->flush();
+       $this->addFlash('message','Article supprimé !');
+       return $this->redirectToRoute('accueil');
+
+   }
 }

@@ -17,8 +17,14 @@ class CommentController extends AbstractController
 {
     public function index(): Response
     {
-        return $this->render('comment/index.html.twig', [
-            'controller_name' => 'CommentController',
+        $comments = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findAll();
+
+        return $this->render('comment/list.html.twig',[
+            'comments' => $comments,
         ]);
     }
+
+
 }

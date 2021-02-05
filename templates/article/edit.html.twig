@@ -4,9 +4,10 @@
 {% block title %}Création d'un article{% endblock %}
 
 {% block body %}
+    <h1>Edition d'un article</h1>
 
     {# If there are any errors on the form, display them #}
-    {% set formErrors = articleForm.vars.errors.form.getErrors(true) %}
+    {% set formErrors = form.vars.errors.form.getErrors(true) %}
     {% if formErrors|length %}
         <div class="alert alert-danger">
             <ul>
@@ -18,11 +19,11 @@
     {% endif %}
 
     {# Render the Form #}
-    {{ form_start(articleForm) }}
-    {{ form_row(articleForm.title) }}
-    {{ form_row(articleForm.content) }}
-    {{ form_row(articleForm.published) }}
-    {{ form_widget(articleForm) }}
-    <button class="btn">Create</button>
-    {{ form_end(articleForm) }}
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.published) }}
+    {{ form_widget(form) }}
+    <button class="btn">Update</button>
+    {{ form_end(form) }}
 {% endblock %}

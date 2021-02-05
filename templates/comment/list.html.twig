@@ -1,0 +1,10 @@
+{% block body %}
+    {% for c in comments %}
+        <li>
+            <a href="{{ path('article_show', {id : c.idArticle.idArticle}) }}">
+                {{ c.content|u.truncate(20,'...') }}
+            </a>
+            ({{ c.creationDate|date('jS F Y') }})
+        </li>
+    {% endfor %}
+{% endblock %}

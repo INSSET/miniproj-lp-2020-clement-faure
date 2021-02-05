@@ -5,6 +5,13 @@
             {{ a.title }}
         </a>
         ({{ a.publicationDate|date('jS F Y') }})
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('article_edit', {
+            id: a.idArticle
+        }) }}">
+            <p class="h6 font-weight-light">edit</p>
+        </a>
+        {% endif %}
     </li>
     {% endfor %}
 {% endblock %}
